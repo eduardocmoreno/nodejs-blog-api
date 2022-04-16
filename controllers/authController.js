@@ -2,19 +2,19 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/userSchema');
 
 //REGISTER NEW USER
-async function signup_post(req, res) {
+async function userSignup(req, res) {
   auth(res, 'signup', req.body);
 };
 
 
 //LOGIN
-async function login_post(req, res) {
+async function userLogin(req, res) {
   auth(res, 'login', req.body);
 };
 
 
 //LOGOUT
-async function logout_get(req, res) {
+async function userLogout(req, res) {
   //replace current token with a blank string and after 1ms force it expire
   res.cookie('jwt', '', { maxAge: 1 });
   res.status(200).json({ message: 'User logged out successfuly!' });
@@ -50,4 +50,4 @@ async function auth(res, type, fields) {
   }
 }
 
-module.exports = { signup_post, login_post, logout_get }
+module.exports = { userSignup, userLogin, userLogout }
